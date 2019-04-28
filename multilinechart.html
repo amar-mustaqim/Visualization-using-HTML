@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Line chart Visualization</title>
+   <!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+// Load Charts and the corechartpackage.
+google.charts.load('current', {'packages':['corechart']});
+
+// Draw the line chart for Test1 when Charts is loaded.
+google.charts.setOnLoadCallback(drawTest1Chart);
+// Draw the line chart for Test2 when Charts is loaded.
+google.charts.setOnLoadCallback(drawTest2Chart);
+
+// Callbackthat draws the line chart for Test1,
+   function drawtest1Chart() {
+// Create the data table for Test1.
+var data = new google.visualization.DataTable();
+data.addColumn('string', 'Name');
+data.addColumn('number', 'Test1');
+data.addColumn('number', 'Test2');
+data.addRows([
+    ['Usamah', 100, 87],
+    ['Safiyya', 20, 76],
+    ['Firas', 65, 98],
+    ['Maher', 89, 100],
+    ['Mikael', 53, 56]
+]);
+
+// Set options for line chart.
+var options = {'title':'Total Marks of Students',
+'width':700,
+'legend':'right',
+'height':300};
+
+// Instantiate and draw the line chart.
+var chart = new google.visualization.LineChart(document.getElementById('line_chart_div'));
+function selectHandler() {
+var selectedItem = chart.getSelection()[0];
+if(selectedItem) {
+	var name = data.getValue(selectedItem.row, 0);
+	alert('The user selected ' + name);
+ }
+} 
+
+google.visualization.events.addListener(chart, 'select', selectHandler);
+chart.draw(data, options);
+}
+
+// Callbackthat draws the pie chart for Anthony's pizza.
+function drawTest2Chart() {
+
+// Create the data table .
+var data = new google.visualization.DataTable();
+data.addColumn('string', 'Name');
+data.addColumn('number', 'Test1');
+data.addRows([
+  ['Usamah', 100],
+    ['Safiyya', 20],
+    ['Firas', 65],
+    ['Maher', 89],
+    ['Mikael', 53]
+]);
+// Set options for line chart.
+var options = {'title':'Total Marks of Students',
+'width':700,
+'legend':'right',
+'height':300};
+
+// Instantiate and draw the line chart.
+var chart = new google.visualization.LineChart(document.getElementById('line_chart2_div'));
+chart.draw(data, options);
+}
+</script>
+</head>
+<body>
+<!--Table and divs that hold the line charts-->
+<table class="columns">
+<tr>
+<td><div id="line_chart_div" style="border: 1px solid #ccc"></div></td>
+<td><div id="line_chart2_div" style="border: 1px solid #ccc"></div></td>
+</tr>
+</table>
+</body>
+</html>
